@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'namespace' => 'busa\seat\Http\Controllers',
+    'namespace' => 'Busa\Seat\Http\Controllers',
     'prefix' => 'busa-seat',
     'middleware' => [
         'web',
