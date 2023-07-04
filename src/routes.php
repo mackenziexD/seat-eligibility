@@ -9,8 +9,8 @@ Route::group([
     ],
 ], function()
 {
-    Route::get('/busa', [
-        'uses' => 'BUSAController@about',
+    Route::get('/', [
+        'uses' => 'BUSAController@busa',
         'as' => 'busa-seat.busa'
     ]);
 

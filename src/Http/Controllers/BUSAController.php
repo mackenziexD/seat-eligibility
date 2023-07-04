@@ -8,6 +8,6 @@ class BUSAController extends Controller
 {
     public function busa()
     {
-        return view('busa-seat::about');
+        return view('busa-seat::busa');
     }
 }

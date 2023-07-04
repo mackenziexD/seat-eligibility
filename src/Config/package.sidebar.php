@@ -1,17 +1,16 @@
 <?php
 
 return [
-    'busa' => [
-        'permission'    => 'global.superuser',
-        'name'          => 'BUSA Package',
-        'icon'          => 'fas fa-cogs',
+    'seat-hr' => [
+        'name' => 'Blackwater USA Inc.',
+        'icon' => 'fas fa-handshake',
         'route_segment' => 'busa',
-        'entries'       => [
+        'entries' => [
             [
-                'name'  => 'Dashboard',
-                'icon'  => 'fas fa-tachometer-alt',
-                'route' => 'busa.dashboard',
-            ]
+                'name' => 'About',
+                'icon' => 'fas fa-info',
+                'route' => 'busa-seat.busa'
+            ],
         ],
     ],
 ];
