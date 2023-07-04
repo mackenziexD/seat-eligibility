@@ -7,6 +7,7 @@ Route::group([
     'namespace' => 'Busa\Seat\Http\Controllers',
     'prefix' => 'api',
 ], function () {
-    Route::get('/', [ApiController::class, 'index']);
-    // Add more routes as needed
+    Route::get('/', [ApiController::class, 'index'])
+    ;
+    Route::get('/busa', [BUSAController::class, 'busa']);
 });
