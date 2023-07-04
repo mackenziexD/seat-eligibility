@@ -1,0 +1,16 @@
+{
+    "name": "busa/seat",
+    "autoload": {
+        "psr-4": {
+            "Busa\\Seat\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Blackwater USA Inc."
+        }
+    ],
+    "require": {
+        "laravel/framework": "^6.0"
+    }
+}
