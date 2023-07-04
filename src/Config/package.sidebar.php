@@ -11,12 +11,7 @@ return [
                 'name'  => 'Dashboard',
                 'icon'  => 'fas fa-tachometer-alt',
                 'route' => 'busa.dashboard',
-            ],
-            [
-                'name'  => 'Settings',
-                'icon'  => 'fas fa-cog',
-                'route' => 'busa.settings',
-            ],
+            ]
         ],
     ],
 ];
