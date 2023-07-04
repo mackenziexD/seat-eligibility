@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Busa\Seat\Http\Controllers\ApiController;
 
+use Busa\Seat\Http\Controllers;
+
 Route::group([
     'namespace' => 'Busa\Seat\Http\Controllers',
     'prefix' => 'api',
