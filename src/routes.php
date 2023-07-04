@@ -1,8 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Busa\Seat\Http\Controllers\ApiController;
+Route::group([
+    'namespace' => 'busa\seat\Http\Controllers',
+    'prefix' => 'busa-seat',
+    'middleware' => [
+        'web',
+        'auth',
+    ],
+], function()
+{
+    Route::get('/busa', [
+        'uses' => 'BUSAController@about',
+        'as' => 'busa-seat.busa'
+    ]);
 
-use Busa\Seat\Http\Controllers\BUSAController;
-
-Route::get('/busa', [BUSAController::class, 'busa'])->name('busa.dashboard');
+});

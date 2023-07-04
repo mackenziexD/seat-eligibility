@@ -2,12 +2,12 @@
 
 namespace Busa\Seat\Http\Controllers;
 
-use Illuminate\Routing\Controller;
+use \Seat\Web\Http\Controllers\Controller;
 
 class BUSAController extends Controller
 {
     public function busa()
     {
-        return view('busa.dashboard');
+        return view('busa-seat::about');
     }
 }
