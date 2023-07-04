@@ -26,27 +26,27 @@ class ApiServiceProvider extends AbstractSeatPlugin
     public function boot()
     {
         // Bootstrap sidebar menu items
-        $this->mergeConfigFrom(__DIR__.'/Config/package.sidebar.php', 'package.sidebar');
+        $this->mergeConfigFrom(__DIR__.'/../Config/package.sidebar.php', 'package.sidebar');
 
 
         // Load routes
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         // Load views
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'busa-seat');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'busa-seat');
 
         // Publish migrations
         $this->publishes([
-            __DIR__.'/database/migrations' => database_path('migrations'),
+            __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'migrations');
 
         // Publish views
         $this->publishes([
-            __DIR__.'/resources/views' => resource_path('views/vendor/busa-seat'),
+            __DIR__.'/../resources/views' => resource_path('views/vendor/busa-seat'),
         ], 'views');
 
         // Load package translations
-        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'busa-seat');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'busa-seat');
     }
 
     /**
