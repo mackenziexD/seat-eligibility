@@ -69,7 +69,7 @@ class ApiServiceProvider extends AbstractSeatPlugin
      */
     public function getName(): string
     {
-        return 'SeAT BUSA Test';
+        return 'SeAT BUSA Recruitment Eligibility Check';
     }
 
     /**
@@ -93,7 +93,7 @@ class ApiServiceProvider extends AbstractSeatPlugin
      */
     public function getPackagistPackageName(): string
     {
-        return 'seat-busa';
+        return 'busa';
     }
 
     /**
@@ -105,6 +105,6 @@ class ApiServiceProvider extends AbstractSeatPlugin
      */
     public function getPackagistVendorName(): string
     {
-        return 'Helious';
+        return 'seat';
     }
 }
