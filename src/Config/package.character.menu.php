@@ -2,10 +2,10 @@
 
 return [
     [
-        'name' => 'busa-seat.profile.sheet',
+        'name' => 'seat-busa::eligibility.index',
         'label' => 'Eligibility Checker',
-        'highlight_view' => 'seat-busa.busa',
+        'highlight_view' => 'seat-busa::eligibility.index',
         'permission' => 'character.sheet',
-        'route' => 'seat-busa.profile.eligibility'
+        'route' => 'seat-busa::eligibility.index'
     ]
 ];
