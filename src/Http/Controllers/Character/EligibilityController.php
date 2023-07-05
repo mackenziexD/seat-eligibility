@@ -205,6 +205,7 @@ class EligibilityController extends Controller
         
             $allAssetsWereLookingFor[] = $assetsWereLookingFor;
             sleep(2);
+            // MUST SLEEP OTHERWISE ZKILL WILL RATE LIMIT, :BLEACH:
         }
 
         $ThreeMonthKills = 0;
