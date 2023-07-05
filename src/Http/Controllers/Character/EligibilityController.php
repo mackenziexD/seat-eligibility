@@ -226,7 +226,7 @@ class EligibilityController extends Controller
             }
         }
 
-        if($ThreeMonthKills >= 0) {
+        if($ThreeMonthKills >= 40) {
             $meets3MonthKillRequirement = true;
         }
 
