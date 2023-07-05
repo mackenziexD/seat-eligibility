@@ -124,7 +124,7 @@ class EligibilityController extends Controller
 
         $allAssetsWereLookingFor = [];
         $meets3MonthKillRequirement = false;
-        // loop through all characters
+
         foreach($allCharacters as $char) {
             $assetsWereLookingFor = [
                 'character_id' => $char->character_id,
@@ -203,7 +203,6 @@ class EligibilityController extends Controller
                 }
             }
         
-            // add the $assetsWereLookingFor for this character to the overall array
             $allAssetsWereLookingFor[] = $assetsWereLookingFor;
             sleep(2);
         }
@@ -220,14 +219,12 @@ class EligibilityController extends Controller
             $meets3MonthKillRequirement = true;
         }
 
-        // setting up vars for if they have a titan, super, carrier, dread, or fax
         $hasATitan = false;
         $hasASuper = false;
         $hasACarrier = false;
         $hasADread = false;
         $hasAFAX = false;
 
-        // setting the vars for the above if they have the asset
         foreach($allAssetsWereLookingFor as $char){
             if($char === false || $char === false) continue;
             if($char['hasTitan']) {
