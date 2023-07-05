@@ -230,33 +230,58 @@ class EligibilityController extends Controller
             $meets3MonthKillRequirement = true;
         }
 
-        $hasATitan = false;
-        $hasASuper = false;
-        $hasACarrier = false;
-        $hasADread = false;
-        $hasAFAX = false;
+        $hasHull = [
+            'Titan' => false,
+            'Super' => false,
+            'Carrier' => false,
+            'Dread' => false,
+            'FAX' => false,
+        ];
+
+        $hasSkills = [
+            'Titan' => false,
+            'Super' => false,
+            'Carrier' => false,
+            'Dread' => false,
+            'FAX' => false,
+        ];
 
         foreach($allAssetsWereLookingFor as $char){
             if($char === false || $char === false) continue;
             if($char['hasTitan']) {
-                $hasATitan = true;
+                $hasHull['Titan'] = true;
+            }
+            if($char['canFlyTitan']) {
+                $hasSkills['Titan'] = true;
             }
             if($char['hasSuper']) {
-                $hasASuper = true;
+                $hasHull['Super'] = true;
+            }
+            if($char['canFlySuper']) {
+                $hasSkills['Super'] = true;
             }
             if($char['hasCarrier']) {
-                $hasACarrier = true;
+                $hasHull['Carrier'] = true;
+            }
+            if($char['canFlyCarrier']) {
+                $hasSkills['Carrier'] = true;
             }
             if($char['hasDread']) {
-                $hasADread = true;
+                $hasHull['Dread'] = true;
+            }
+            if($char['canFlyDread']) {
+                $hasSkills['Dread'] = true;
             }
             if($char['hasFAX']) {
-                $hasAFAX = true;
+                $hasHull['FAX'] = true;
+            }
+            if($char['canFlyFAX']) {
+                $hasSkills['FAX'] = true;
             }
         }
 
         $mainCharacter = $character->refresh_token->user->main_character->name;
 
-        return view('seat-busa::eligibility.index', compact('character', 'allAssetsWereLookingFor', 'meets3MonthKillRequirement', 'mainCharacter', 'hasATitan', 'hasASuper', 'hasACarrier', 'hasADread', 'hasAFAX'));
+        return view('seat-busa::eligibility.index', compact('character', 'allAssetsWereLookingFor', 'meets3MonthKillRequirement', 'mainCharacter', 'hasHull', 'hasSkills'));
     }
 }

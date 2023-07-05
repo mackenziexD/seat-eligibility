@@ -18,18 +18,14 @@
                 <div class="col-md-4 mb-2 charactersList">
                     <h4>Information Summery:</h4>
                     @if($meets3MonthKillRequirement)<span class="text-success"><i class="fas fa-check-circle"></i> Meets 3 Month Kill Requirement Of 40 Kills</span></span>@else<span class="text-danger"><i class="fas fa-times-circle"></i> Doesn't Meet 3 Month Kill Requirement Of 40 Kills</span></span>@endif
-                    
-                    <br>
-                    <br>
-                    @if($hasATitan)<span class="text-success"><i class="fas fa-check-circle"></i> Has A Titan</span>@else<span class="text-danger"><i class="fas fa-times-circle"></i> Doesn't Have A Titan</span>@endif
-                    <br>
-                    @if($hasASuper)<span class="text-success"><i class="fas fa-check-circle"></i> Has A Super</span>@else<span class="text-danger"><i class="fas fa-times-circle"></i> Doesn't Have A Super</span>@endif
-                    <br>
-                    @if($hasACarrier)<span class="text-success"><i class="fas fa-check-circle"></i> Has A Carrier</span>@else<span class="text-danger"><i class="fas fa-times-circle"></i> Doesn't Have A Carrier</span>@endif
-                    <br>
-                    @if($hasADread)<span class="text-success"><i class="fas fa-check-circle"></i> Has A Dread</span>@else<span class="text-danger"><i class="fas fa-times-circle"></i> Doesn't Have A Dread</span>@endif
-                    <br>
-                    @if($hasAFAX)<span class="text-success"><i class="fas fa-check-circle"></i> Has A FAX</span>@else<span class="text-danger"><i class="fas fa-times-circle"></i> Doesn't Have A FAX</span>@endif
+                    <hr>
+                    @foreach($hasHull as $hull => $value)
+                        @if($value==true)<span class="text-success"><i class="fas fa-check-circle"></i> Has a {{$hull}}</span>@else<span class="text-danger"><i class="fas fa-times-circle"></i> Doesn't have a {{$hull}}</span>@endif</br>
+                    @endforeach
+                    <hr>
+                    @foreach($hasSkills as $hull => $value)
+                        @if($value==true)<span class="text-success"><i class="fas fa-check-circle"></i> Character that can fly {{$hull}}</span>@else<span class="text-danger"><i class="fas fa-times-circle"></i> No character that can fly {{$hull}}</span>@endif</br>
+                    @endforeach
                 </div>
                 <div class="col-md-8 mb-2 charactersList overflow-auto" style="max-height:70vh;">
                     @foreach($allAssetsWereLookingFor as $char)
