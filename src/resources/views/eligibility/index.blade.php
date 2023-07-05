@@ -46,6 +46,12 @@
                                         @if($char['hasDread'])<li><span class="badge badge-success">Owns a Dread</span></li>@endif
                                         @if($char['hasFAX'])<li><span class="badge badge-success">Owns a FAX</span></li>@endif
                                         @if($char['hasCarrier'])<li><span class="badge badge-success">Owns a Carrier</span></li>@endif
+                                        <br>
+                                        @if($char['canFlyTitan'])<li><span class="badge badge-success">Can fly a Titan</span></li>@endif
+                                        @if($char['canFlySuper'])<li><span class="badge badge-success">Can fly a Super</span></li>@endif
+                                        @if($char['canFlyDread'])<li><span class="badge badge-success">Can fly a Dread</span></li>@endif
+                                        @if($char['canFlyFAX'])<li><span class="badge badge-success">Can fly a FAX</span></li>@endif
+                                        @if($char['canFlyCarrier'])<li><span class="badge badge-success">Can fly a Carrier</span></li>@endif
                                 </div>
                             </div>
                         </div>

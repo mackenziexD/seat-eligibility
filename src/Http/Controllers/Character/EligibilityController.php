@@ -4,6 +4,7 @@ namespace Busa\Seat\Http\Controllers\Character;
 
 use Seat\Eveapi\Models\Character\CharacterInfo;
 use Seat\Eveapi\Models\Assets\CharacterAsset;
+use Seat\Eveapi\Models\Character\CharacterSkill;
 use Seat\Web\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -49,6 +50,12 @@ class EligibilityController extends Controller
             '42241',
             '45649'
         ];
+        $titansSkills = [
+            '3344',
+            '3345',
+            '3346',
+            '3347',
+        ];
         $supers = [
             '3514',
             '22852',
@@ -57,11 +64,20 @@ class EligibilityController extends Controller
             '23917',
             '42125'
         ];
+        $supersSkills = [
+            '32339',
+        ];
         $carriers = [
             '23757',
             '23911',
             '23915',
             '24483'
+        ];
+        $carriersSkills = [
+            '24311',
+            '24312',
+            '24313',
+            '24314',
         ];
         $dreads = [
             '19720',
@@ -81,7 +97,15 @@ class EligibilityController extends Controller
             '77284',
             '77288'
         ];
-        $faxess = [
+        $dreadsSkills = [
+            '52997',
+            '77738',
+            '20525',
+            '20530',
+            '20531',
+            '20532',
+        ];
+        $faxes = [
             '37604',
             '37605',
             '37606',
@@ -90,8 +114,12 @@ class EligibilityController extends Controller
             '42242',
             '45645'
         ];
-        // create an array of id's
-        $ids = [
+        $faxSkills = [
+            '27906',
+            '40535',
+            '40536',
+            '40537',
+            '40538',
         ];
 
         $allAssetsWereLookingFor = [];
@@ -102,10 +130,15 @@ class EligibilityController extends Controller
                 'character_id' => $char->character_id,
                 'name' => $char->name,
                 'hasTitan' => false,
+                'canFlyTitan' => false,
                 'hasSuper' => false,
+                'canFlySuper' => false,
                 'hasCarrier' => false,
+                'canFlyCarrier' => false,
                 'hasDread' => false,
+                'canFlyDread' => false,
                 'hasFAX' => false,
+                'canFlyFAX' => false,
                 'totalKillsOver3Months' => '0',
             ];
         
@@ -124,7 +157,7 @@ class EligibilityController extends Controller
                 if(in_array($asset->type_id, $dreads)) {
                     $assetsWereLookingFor['hasDread'] = true;
                 }
-                if(in_array($asset->type_id, $faxess)) {
+                if(in_array($asset->type_id, $faxes)) {
                     $assetsWereLookingFor['hasFAX'] = true;
                 }
             }
@@ -145,14 +178,34 @@ class EligibilityController extends Controller
                     }
                 }
                 $assetsWereLookingFor['totalKillsOver3Months'] = $totalKillsOver3Months;
-            }; 
+            } else {
+                $assetsWereLookingFor['totalKillsOver3Months'] = '0';
+            }
 
+            
+            $char->skills = CharacterSkill::where('character_id', $char->character_id)->get();
 
+            foreach($char->skills as $skill) {
+                if(in_array($skill->skill_id, $titansSkills) && $skill->trained_skill_level >= 1) {
+                    $assetsWereLookingFor['canFlyTitan'] = true;
+                }
+                if(in_array($skill->skill_id, $supersSkills) && $skill->trained_skill_level >= 1) {
+                    $assetsWereLookingFor['canFlySuper'] = true;
+                }
+                if(in_array($skill->skill_id, $carriersSkills) && $skill->trained_skill_level >= 1) {
+                    $assetsWereLookingFor['canFlyCarrier'] = true;
+                }
+                if(in_array($skill->skill_id, $dreadsSkills) && $skill->trained_skill_level >= 1) {
+                    $assetsWereLookingFor['canFlyDread'] = true;
+                }
+                if(in_array($skill->skill_id, $faxSkills) && $skill->trained_skill_level >= 1) {
+                    $assetsWereLookingFor['canFlyFAX'] = true;
+                }
+            }
         
             // add the $assetsWereLookingFor for this character to the overall array
             $allAssetsWereLookingFor[] = $assetsWereLookingFor;
-
-            sleep(0.5);
+            sleep(2);
         }
 
         $ThreeMonthKills = 0;
@@ -166,12 +219,15 @@ class EligibilityController extends Controller
         if($ThreeMonthKills >= 0) {
             $meets3MonthKillRequirement = true;
         }
+
+        // setting up vars for if they have a titan, super, carrier, dread, or fax
         $hasATitan = false;
         $hasASuper = false;
         $hasACarrier = false;
         $hasADread = false;
         $hasAFAX = false;
-        // if any of the characters have a titan, super, carrier, dread, or fax, then the main character is eligible
+
+        // setting the vars for the above if they have the asset
         foreach($allAssetsWereLookingFor as $char){
             if($char === false || $char === false) continue;
             if($char['hasTitan']) {
