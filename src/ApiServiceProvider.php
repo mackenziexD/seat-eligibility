@@ -105,6 +105,6 @@ class ApiServiceProvider extends AbstractSeatPlugin
      */
     public function getPackagistVendorName(): string
     {
-        return 'busa';
+        return 'Helious';
     }
 }
