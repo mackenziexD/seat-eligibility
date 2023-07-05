@@ -33,6 +33,7 @@ class EligibilityController extends Controller
         
         return $json;
     }
+    
     /**
      * Show the eligibility checker.
      *
@@ -225,10 +226,7 @@ class EligibilityController extends Controller
                 $ThreeMonthKills += $char['totalKillsOver3Months'];
             }
         }
-
-        if($ThreeMonthKills >= 40) {
-            $meets3MonthKillRequirement = true;
-        }
+        if($ThreeMonthKills >= 40) $meets3MonthKillRequirement = true;
 
         $hasHull = [
             'Titan' => false,
@@ -237,7 +235,6 @@ class EligibilityController extends Controller
             'Dread' => false,
             'FAX' => false,
         ];
-
         $hasSkills = [
             'Titan' => false,
             'Super' => false,
@@ -247,7 +244,7 @@ class EligibilityController extends Controller
         ];
 
         foreach($allAssetsWereLookingFor as $char){
-            if($char === false || $char === false) continue;
+            if($char === false) continue;
             if($char['hasTitan']) {
                 $hasHull['Titan'] = true;
             }
