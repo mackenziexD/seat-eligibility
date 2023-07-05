@@ -15,7 +15,7 @@ class ApiServiceProvider extends AbstractSeatPlugin
      */
     public function register()
     {
-        // Register any bindings or dependencies here
+        $this->mergeConfigFrom(__DIR__ . '/Config/package.character.menu.php', 'package.character.menu');
     }
 
     /**
@@ -25,15 +25,10 @@ class ApiServiceProvider extends AbstractSeatPlugin
      */
     public function boot()
     {
-        // Bootstrap sidebar menu items
-        $this->mergeConfigFrom(__DIR__.'/Config/package.sidebar.php', 'package.sidebar');
-
-
-        // Load routes
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         // Load views
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'busa-seat');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'seat-busa');
 
         // Publish migrations
         $this->publishes([
@@ -42,7 +37,7 @@ class ApiServiceProvider extends AbstractSeatPlugin
 
         // Publish views
         $this->publishes([
-            __DIR__.'/resources/views' => resource_path('views/vendor/busa-seat'),
+            __DIR__.'/resources/views' => resource_path('views/vendor/seat-busa'),
         ], 'views');
 
     }
@@ -55,6 +50,14 @@ class ApiServiceProvider extends AbstractSeatPlugin
     protected function getRouteFile()
     {
         return __DIR__.'/routes.php';
+    }
+
+    /**
+     * Loads view composers to reuse data within views
+     */
+    private function loadViewComposers()
+    {
+        $this->app['view']->composer('seat-busa::user.*', Profile::class);;
     }
 
     /**
@@ -90,7 +93,7 @@ class ApiServiceProvider extends AbstractSeatPlugin
      */
     public function getPackagistPackageName(): string
     {
-        return 'busa-seat';
+        return 'seat-busa';
     }
 
     /**

@@ -1,17 +1,18 @@
 <?php
 
 Route::group([
-    'namespace' => 'Busa\Seat\Http\Controllers',
-    'prefix' => 'busa-seat',
+    'namespace' => 'Busa\Seat\Http\Controllers\Character',
+    'prefix' => 'characters',
     'middleware' => [
         'web',
         'auth',
     ],
 ], function()
 {
-    Route::get('/', [
-        'uses' => 'BUSAController@busa',
-        'as' => 'busa-seat.busa'
+    Route::get('/{character}/eligibility', [
+        'uses' => 'EligibilityController@index',
+        'as' => 'seat-busa.profile.eligibility',
+        'middleware' => 'can:character.sheet,character',
     ]);
 
 });

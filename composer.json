@@ -1,5 +1,7 @@
 {
-    "name": "busa/seat",
+    "name": "seat/busa",
+    "description": "A Laravel 6.0 package for Seat",
+    "version": "1.0.0",
     "autoload": {
         "psr-4": {
             "Busa\\Seat\\": "src/"
