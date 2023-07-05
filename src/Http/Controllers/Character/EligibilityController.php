@@ -41,6 +41,10 @@ class EligibilityController extends Controller
      public function index(CharacterInfo $character, Request $request)
     {
         $allCharacters = $character->refresh_token->user->all_characters()->sortBy('id');
+        
+        /////////////
+        /// TYPE ID'S
+        /////////////
         $titans = [
             '671',
             '11567',
@@ -50,12 +54,6 @@ class EligibilityController extends Controller
             '42241',
             '45649'
         ];
-        $titansSkills = [
-            '3344',
-            '3345',
-            '3346',
-            '3347',
-        ];
         $supers = [
             '3514',
             '22852',
@@ -64,20 +62,11 @@ class EligibilityController extends Controller
             '23917',
             '42125'
         ];
-        $supersSkills = [
-            '32339',
-        ];
         $carriers = [
             '23757',
             '23911',
             '23915',
             '24483'
-        ];
-        $carriersSkills = [
-            '24311',
-            '24312',
-            '24313',
-            '24314',
         ];
         $dreads = [
             '19720',
@@ -97,14 +86,6 @@ class EligibilityController extends Controller
             '77284',
             '77288'
         ];
-        $dreadsSkills = [
-            '52997',
-            '77738',
-            '20525',
-            '20530',
-            '20531',
-            '20532',
-        ];
         $faxes = [
             '37604',
             '37605',
@@ -114,6 +95,34 @@ class EligibilityController extends Controller
             '42242',
             '45645'
         ];
+        /////////////
+
+        /////////////
+        //// SKILL ID'S
+        /////////////
+        $titansSkills = [
+            '3344',
+            '3345',
+            '3346',
+            '3347',
+        ];
+        $supersSkills = [
+            '32339',
+        ];
+        $carriersSkills = [
+            '24311',
+            '24312',
+            '24313',
+            '24314',
+        ];
+        $dreadsSkills = [
+            '52997',
+            '77738',
+            '20525',
+            '20530',
+            '20531',
+            '20532',
+        ];
         $faxSkills = [
             '27906',
             '40535',
@@ -121,6 +130,7 @@ class EligibilityController extends Controller
             '40537',
             '40538',
         ];
+        /////////////
 
         $allAssetsWereLookingFor = [];
         $meets3MonthKillRequirement = false;
