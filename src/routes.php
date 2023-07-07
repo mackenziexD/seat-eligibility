@@ -9,10 +9,11 @@ Route::group([
     ],
 ], function()
 {
+
     Route::get('/{character}/eligibility', [
         'uses' => 'EligibilityController@index',
         'as' => 'seat-eligibility::eligibility',
         'middleware' => 'can:character.sheet,character',
     ]);
-
+    
 });
