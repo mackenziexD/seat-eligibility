@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'namespace' => 'Busa\Seat\Http\Controllers\Character',
+    'namespace' => 'helious\SeatEligibility\Http\Controllers\Character',
     'prefix' => 'characters',
     'middleware' => [
         'web',
@@ -11,7 +11,7 @@ Route::group([
 {
     Route::get('/{character}/eligibility', [
         'uses' => 'EligibilityController@index',
-        'as' => 'seat-busa::eligibility',
+        'as' => 'seat-eligibility::eligibility',
         'middleware' => 'can:character.sheet,character',
     ]);
 

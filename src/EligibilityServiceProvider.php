@@ -1,6 +1,6 @@
 <?php
 
-namespace busa\seat;
+namespace helious\SeatEligibility;
 
 use Seat\Services\AbstractSeatPlugin;
 
@@ -93,7 +93,7 @@ class EligibilityServiceProvider extends AbstractSeatPlugin
      */
     public function getPackagistPackageName(): string
     {
-        return 'busa';
+        return 'helious';
     }
 
     /**
@@ -105,6 +105,6 @@ class EligibilityServiceProvider extends AbstractSeatPlugin
      */
     public function getPackagistVendorName(): string
     {
-        return 'seat';
+        return 'seat-eligibility';
     }
 }

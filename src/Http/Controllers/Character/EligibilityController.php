@@ -1,6 +1,6 @@
 <?php
 
-namespace Busa\Seat\Http\Controllers\Character;
+namespace helious\SeatEligibility\Http\Controllers\Character;
 
 use Seat\Eveapi\Models\Character\CharacterInfo;
 use Seat\Eveapi\Models\Assets\CharacterAsset;
@@ -279,6 +279,6 @@ class EligibilityController extends Controller
 
         $mainCharacter = $character->refresh_token->user->main_character->name;
 
-        return view('seat-busa::eligibility.index', compact('character', 'allAssetsWereLookingFor', 'meets3MonthKillRequirement', 'mainCharacter', 'hasHull', 'hasSkills'));
+        return view('seat-eligibility::eligibility.index', compact('character', 'allAssetsWereLookingFor', 'meets3MonthKillRequirement', 'mainCharacter', 'hasHull', 'hasSkills'));
     }
 }
