@@ -46,7 +46,7 @@ class EligibilityServiceProvider extends AbstractSeatPlugin
     {
         return __DIR__.'/routes.php';
     }
-    
+
     /**
      * Return the plugin public name as it should be displayed into settings.
      *
@@ -80,7 +80,7 @@ class EligibilityServiceProvider extends AbstractSeatPlugin
      */
     public function getPackagistPackageName(): string
     {
-        return 'helious';
+        return 'seat-eligibility';
     }
 
     /**
@@ -92,6 +92,6 @@ class EligibilityServiceProvider extends AbstractSeatPlugin
      */
     public function getPackagistVendorName(): string
     {
-        return 'seat-eligibility';
+        return 'helious';
     }
 }

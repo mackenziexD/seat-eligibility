@@ -1,4 +1,4 @@
-@extends('web::character.layouts.view', ['viewname' => 'eligibility'])
+@extends('web::character.layouts.view', ['viewname' => 'seat-eligibility::eligibility'])
 
 @section('page_header', trans_choice('web::seat.character', 1) . ' Eligibility Check')
 <style>

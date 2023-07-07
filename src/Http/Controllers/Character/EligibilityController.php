@@ -4,6 +4,12 @@ namespace Helious\SeatEligibility\Http\Controllers\Character;
 
 use Seat\Eveapi\Models\Character\CharacterInfo;
 use Seat\Eveapi\Models\Assets\CharacterAsset;
+
+use Seat\Eveapi\Models\Killmails\KillmailAttacker;
+use Seat\Eveapi\Models\Killmails\KillmailVictim;
+use Seat\Eveapi\Models\Killmails\KillmailDetail;
+use Seat\Eveapi\Models\Killmails\Killmail;
+
 use Seat\Eveapi\Models\Character\CharacterSkill;
 use Seat\Web\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,29 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use Seat\Web\Http\DataTables\Scopes\CharacterScope;
 
 class EligibilityController extends Controller
-{
-    /**
-     * Gets the zkill stats for a character
-     * https://zkillboard.com/api/stats/characterID/{id}}/
-     * variables: id
-     * 
-    */
-    public function pullZkillStats($id){
-        $client = new \GuzzleHttp\Client();
-    
-        $res = $client->request('GET', 'https://zkillboard.com/api/stats/characterID/'.$id.'/', [
-            'headers' => [
-                'Accept-Encoding' => 'gzip',
-                'User-Agent' => 'Helious Jin-Mei/BUSA SeAT'
-            ]
-        ]);
-    
-        $body = $res->getBody();
-        $json = json_decode($body, true);
-        
-        return $json;
-    }
-    
+{    
     /**
      * Show the eligibility checker.
      *
@@ -173,27 +157,17 @@ class EligibilityController extends Controller
                 }
             }
 
-            $zkillStats = $this->pullZkillStats($char->character_id);
 
-            if(isset($zkillStats['months']) || !empty($zkillStats['months'])) { 
-                $zkillStats = $zkillStats['months'];
-                $currentYearMonth = date('Ym');
-                $lastYearMonth = date('Ym', strtotime('-1 month'));
-                $secondLastYearMonth = date('Ym', strtotime('-2 month'));
-                $thirdLastYearMonth = date('Ym', strtotime('-3 month'));
 
-                $totalKillsOver3Months = 0;
-                foreach($zkillStats as $Ym => $stats){
-                    if($Ym == $currentYearMonth || $Ym == $lastYearMonth || $Ym == $secondLastYearMonth || $Ym == $thirdLastYearMonth){
-                        $totalKillsOver3Months += $stats['shipsDestroyed'];
-                    }
-                }
-                $assetsWereLookingFor['totalKillsOver3Months'] = $totalKillsOver3Months;
-            } else {
-                $assetsWereLookingFor['totalKillsOver3Months'] = '0';
-            }
+            $attacks = KillmailAttacker::with('character')
+                ->where('character_id', $char->character_id)
+                ->where('created_at', '>=', now()->subMonths(3))
+                ->get();
 
+            $attacksCount = $attacks->count();
             
+            $assetsWereLookingFor['totalKillsOver3Months'] = $attacksCount;
+
             $char->skills = CharacterSkill::where('character_id', $char->character_id)->get();
 
             foreach($char->skills as $skill) {
