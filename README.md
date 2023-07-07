@@ -1,6 +1,6 @@
 # SeAT-Eligibility - Eligibility Checker plugin for SeAT
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/cryocaustik/seat-hr.svg?style=flat-square)](https://packagist.org/packages/cryocaustik/seat-hr)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/cryocaustik/seat-hr.svg?style=flat-square)](https://packagist.org/packages/seat/busa)
 [![Build Status](https://img.shields.io/travis/cryocaustik/seat-hr/master.svg?style=flat-square)](https://travis-ci.org/cryocaustik/seat-hr)
 [![Quality Score](https://img.shields.io/scrutinizer/g/cryocaustik/seat-hr.svg?style=flat-square)](https://scrutinizer-ci.com/g/cryocaustik/seat-hr)
 [![Total Downloads](https://img.shields.io/packagist/dt/cryocaustik/seat-hr.svg?style=flat-square)](https://packagist.org/packages/cryocaustik/seat-hr)
