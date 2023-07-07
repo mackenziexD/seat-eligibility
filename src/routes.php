@@ -13,7 +13,7 @@ Route::group([
 
     Route::get('/{character}/eligibility', [
         'uses' => 'EligibilityController@index',
-        'as' => 'seat-eligibility::eligibility.index',
+        'as' => 'seat-eligibility::eligibility',
         'middleware' => 'can:character.sheet,character',
     ]);
 
