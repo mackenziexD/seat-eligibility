@@ -1,6 +1,6 @@
 <?php
 
-namespace helious\SeatEligibility\Http\Controllers\Character;
+namespace Helious\SeatEligibility\Http\Controllers\Character;
 
 use Seat\Eveapi\Models\Character\CharacterInfo;
 use Seat\Eveapi\Models\Assets\CharacterAsset;
