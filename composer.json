@@ -1,6 +1,10 @@
 {
     "name": "helious/seat-eligibility",
     "type": "library",
+    "keywords": [
+        "helious",
+        "seat-eligibility"
+    ],
     "authors": [
         {
             "name": "Helious",
