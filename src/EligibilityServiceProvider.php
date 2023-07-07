@@ -5,7 +5,7 @@ namespace busa\seat;
 use Seat\Services\AbstractSeatPlugin;
 
 
-class ApiServiceProvider extends AbstractSeatPlugin
+class EligibilityServiceProvider extends AbstractSeatPlugin
 {
 
     /**

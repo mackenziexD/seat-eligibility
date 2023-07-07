@@ -1,18 +1,25 @@
 {
-    "name": "seat/busa",
-    "description": "A Laravel 6.0 package for Seat",
-    "version": "1.0.1",
+    "name": "busa/seat",
+    "type": "library",
+    "authors": [
+        {
+            "name": "heliousjin-mei",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Busa\\Seat\\": "src/"
         }
     },
-    "authors": [
-        {
-            "name": "Blackwater USA Inc."
-        }
-    ],
     "require": {
         "laravel/framework": "^6.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Busa\\Seat\\BUSAServiceProvider"
+            ]
+        }
     }
 }

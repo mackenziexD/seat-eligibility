@@ -6,6 +6,6 @@ return [
         'label' => 'Eligibility Checker',
         'highlight_view' => 'seat-busa::eligibility.index',
         'permission' => 'character.sheet',
-        'route' => 'seat-busa::eligibility.index'
+        'route' => 'seat-busa::eligibility'
     ]
 ];
