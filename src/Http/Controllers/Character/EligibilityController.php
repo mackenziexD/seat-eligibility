@@ -137,113 +137,89 @@ class EligibilityController extends Controller
                 'totalKillsOver3Months' => '0',
             ];
         
-            $char->assets = CharacterAsset::where('character_id', $char->character_id)->get();
-        
-            foreach($char->assets as $asset) {
-                if(in_array($asset->type_id, $titans)) {
-                    $assetsWereLookingFor['hasTitan'] = true;
-                }
-                if(in_array($asset->type_id, $supers)) {
-                    $assetsWereLookingFor['hasSuper'] = true;
-                }
-                if(in_array($asset->type_id, $carriers)) {
-                    $assetsWereLookingFor['hasCarrier'] = true;
-                }
-                if(in_array($asset->type_id, $dreads)) {
-                    $assetsWereLookingFor['hasDread'] = true;
-                }
-                if(in_array($asset->type_id, $faxes)) {
-                    $assetsWereLookingFor['hasFAX'] = true;
-                }
-            }
+            // Get the assets
+            $assets = CharacterAsset::where('character_id', $char->character_id)->pluck('type_id');
+
+            $assetsWereLookingFor = array_merge($assetsWereLookingFor, [
+                'hasTitan' => $assets->contains(function ($value) use ($titans) {
+                    return in_array($value, $titans);
+                }),
+                'hasSuper' => $assets->contains(function ($value) use ($supers) {
+                    return in_array($value, $supers);
+                }),
+                'hasCarrier' => $assets->contains(function ($value) use ($carriers) {
+                    return in_array($value, $carriers);
+                }),
+                'hasDread' => $assets->contains(function ($value) use ($dreads) {
+                    return in_array($value, $dreads);
+                }),
+                'hasFAX' => $assets->contains(function ($value) use ($faxes) {
+                    return in_array($value, $faxes);
+                }),
+            ]);
+
+            $allSkillIds = array_merge($titansSkills, $supersSkills, $carriersSkills, $dreadsSkills, $faxSkills);
+
+            // Get the skills
+            $skills = CharacterSkill::where('character_id', $char->character_id)
+                ->whereIn('skill_id', $allSkillIds)
+                ->get();
+
+            // Update the array with skill checks
+            $assetsWereLookingFor = array_merge($assetsWereLookingFor, [
+                'canFlyTitan' => $skills->contains(function ($skill) use ($titansSkills) {
+                    return in_array($skill->skill_id, $titansSkills) && $skill->trained_skill_level >= 1;
+                }),
+                'canFlySuper' => $skills->contains(function ($skill) use ($supersSkills) {
+                    return in_array($skill->skill_id, $supersSkills) && $skill->trained_skill_level >= 1;
+                }),
+                'canFlyCarrier' => $skills->contains(function ($skill) use ($carriersSkills) {
+                    return in_array($skill->skill_id, $carriersSkills) && $skill->trained_skill_level >= 1;
+                }),
+                'canFlyDread' => $skills->contains(function ($skill) use ($dreadsSkills) {
+                    return in_array($skill->skill_id, $dreadsSkills) && $skill->trained_skill_level >= 1;
+                }),
+                'canFlyFAX' => $skills->contains(function ($skill) use ($faxSkills) {
+                    return in_array($skill->skill_id, $faxSkills) && $skill->trained_skill_level >= 1;
+                }),
+            ]);
 
             $attacks = KillmailAttacker::with('character')
                 ->where('character_id', $char->character_id)
                 ->where('created_at', '>=', now()->subMonths(3))
                 ->get();
-
             $attacksCount = $attacks->count();
-            
             $assetsWereLookingFor['totalKillsOver3Months'] = $attacksCount;
-
-            $char->skills = CharacterSkill::where('character_id', $char->character_id)->get();
-
-            foreach($char->skills as $skill) {
-                if(in_array($skill->skill_id, $titansSkills) && $skill->trained_skill_level >= 1) {
-                    $assetsWereLookingFor['canFlyTitan'] = true;
-                }
-                if(in_array($skill->skill_id, $supersSkills) && $skill->trained_skill_level >= 1) {
-                    $assetsWereLookingFor['canFlySuper'] = true;
-                }
-                if(in_array($skill->skill_id, $carriersSkills) && $skill->trained_skill_level >= 1) {
-                    $assetsWereLookingFor['canFlyCarrier'] = true;
-                }
-                if(in_array($skill->skill_id, $dreadsSkills) && $skill->trained_skill_level >= 1) {
-                    $assetsWereLookingFor['canFlyDread'] = true;
-                }
-                if(in_array($skill->skill_id, $faxSkills) && $skill->trained_skill_level >= 1) {
-                    $assetsWereLookingFor['canFlyFAX'] = true;
-                }
-            }
         
             $allAssetsWereLookingFor[] = $assetsWereLookingFor;
         }
 
         $ThreeMonthKills = 0;
+
         foreach($allAssetsWereLookingFor as $char){
             if($char === 'false' || $char === false) continue;
             if($char['totalKillsOver3Months'] > 0) {
                 $ThreeMonthKills += $char['totalKillsOver3Months'];
             }
         }
+
         if($ThreeMonthKills >= 40) $meets3MonthKillRequirement = true;
 
-        $hasHull = [
-            'Titan' => false,
-            'Super' => false,
-            'Carrier' => false,
-            'Dread' => false,
-            'FAX' => false,
-        ];
-        $hasSkills = [
-            'Titan' => false,
-            'Super' => false,
-            'Carrier' => false,
-            'Dread' => false,
-            'FAX' => false,
-        ];
+        $shipTypes = ['Titan', 'Super', 'Carrier', 'Dread', 'FAX'];
+        $hasHull = array_fill_keys($shipTypes, false);
+        $hasSkills = array_fill_keys($shipTypes, false);
 
-        foreach($allAssetsWereLookingFor as $char){
-            if($char === false) continue;
-            if($char['hasTitan']) {
-                $hasHull['Titan'] = true;
-            }
-            if($char['canFlyTitan']) {
-                $hasSkills['Titan'] = true;
-            }
-            if($char['hasSuper']) {
-                $hasHull['Super'] = true;
-            }
-            if($char['canFlySuper']) {
-                $hasSkills['Super'] = true;
-            }
-            if($char['hasCarrier']) {
-                $hasHull['Carrier'] = true;
-            }
-            if($char['canFlyCarrier']) {
-                $hasSkills['Carrier'] = true;
-            }
-            if($char['hasDread']) {
-                $hasHull['Dread'] = true;
-            }
-            if($char['canFlyDread']) {
-                $hasSkills['Dread'] = true;
-            }
-            if($char['hasFAX']) {
-                $hasHull['FAX'] = true;
-            }
-            if($char['canFlyFAX']) {
-                $hasSkills['FAX'] = true;
+        foreach ($allAssetsWereLookingFor as $char) {
+            if ($char === false) continue;
+
+            foreach ($shipTypes as $shipType) {
+                if (isset($char['has' . $shipType]) && $char['has' . $shipType]) {
+                    $hasHull[$shipType] = true;
+                }
+
+                if (isset($char['canFly' . $shipType]) && $char['canFly' . $shipType]) {
+                    $hasSkills[$shipType] = true;
+                }
             }
         }
 
