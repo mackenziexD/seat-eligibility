@@ -1,6 +1,6 @@
 <?php
 
-namespace helious\SeatEligibility;
+namespace Helious\SeatEligibility;
 
 use Seat\Services\AbstractSeatPlugin;
 
