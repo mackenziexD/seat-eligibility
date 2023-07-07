@@ -157,8 +157,6 @@ class EligibilityController extends Controller
                 }
             }
 
-
-
             $attacks = KillmailAttacker::with('character')
                 ->where('character_id', $char->character_id)
                 ->where('created_at', '>=', now()->subMonths(3))
@@ -189,8 +187,6 @@ class EligibilityController extends Controller
             }
         
             $allAssetsWereLookingFor[] = $assetsWereLookingFor;
-            sleep(2);
-            // MUST SLEEP OTHERWISE ZKILL WILL RATE LIMIT, :BLEACH:
         }
 
         $ThreeMonthKills = 0;

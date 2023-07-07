@@ -27,7 +27,7 @@
                         @if($value==true)<span class="text-success"><i class="fas fa-check-circle"></i> Character that can fly {{$hull}}</span>@else<span class="text-danger"><i class="fas fa-times-circle"></i> No character that can fly {{$hull}}</span>@endif</br>
                     @endforeach
                 </div>
-                <div class="col-md-8 mb-2 charactersList overflow-auto" style="max-height:70vh;">
+                <div class="col-md-8 mb-2 charactersList">
                     @foreach($allAssetsWereLookingFor as $char)
                         <div class="col-md-12 mb-2 charactersList">
                             <div class="row">
