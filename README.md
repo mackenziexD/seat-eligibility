@@ -12,7 +12,7 @@ Eligibility Checker plugin for [SeAT](https://github.com/eveseat/seat) that allo
 You can install the package via composer:
 
 ```bash
-composer require seat/busa
+composer require helious/seat-eligibility
 ```
 
 ### Changelog

@@ -25,20 +25,15 @@ class EligibilityServiceProvider extends AbstractSeatPlugin
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadRoutesFrom(__DIR__.'/routes.php');-
 
         // Load views
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'seat-busa');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'seat-eligibility');
 
         // Publish migrations
         $this->publishes([
             __DIR__.'/database/migrations' => database_path('migrations'),
         ], 'migrations');
-
-        // Publish views
-        $this->publishes([
-            __DIR__.'/resources/views' => resource_path('views/vendor/seat-busa'),
-        ], 'views');
 
     }
 
@@ -51,15 +46,7 @@ class EligibilityServiceProvider extends AbstractSeatPlugin
     {
         return __DIR__.'/routes.php';
     }
-
-    /**
-     * Loads view composers to reuse data within views
-     */
-    private function loadViewComposers()
-    {
-        $this->app['view']->composer('seat-busa::user.*', Profile::class);;
-    }
-
+    
     /**
      * Return the plugin public name as it should be displayed into settings.
      *
@@ -69,7 +56,7 @@ class EligibilityServiceProvider extends AbstractSeatPlugin
      */
     public function getName(): string
     {
-        return 'SeAT BUSA Recruitment Eligibility Check';
+        return 'SeAT Eligibility Check';
     }
 
     /**
