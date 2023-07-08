@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use Seat\Web\Http\DataTables\Scopes\CharacterScope;
 
 class EligibilityController extends Controller
-{    
+{
     /**
      * Show the eligibility checker.
      *
@@ -183,13 +183,6 @@ class EligibilityController extends Controller
                     return in_array($skill->skill_id, $faxSkills) && $skill->trained_skill_level >= 1;
                 }),
             ]);
-
-            $attacks = KillmailAttacker::with('character')
-                ->where('character_id', $char->character_id)
-                ->where('created_at', '>=', now()->subMonths(3))
-                ->get();
-            $attacksCount = $attacks->count();
-            $assetsWereLookingFor['totalKillsOver3Months'] = $attacksCount;
         
             $allAssetsWereLookingFor[] = $assetsWereLookingFor;
         }
@@ -202,8 +195,6 @@ class EligibilityController extends Controller
                 $ThreeMonthKills += $char['totalKillsOver3Months'];
             }
         }
-
-        if($ThreeMonthKills >= 40) $meets3MonthKillRequirement = true;
 
         $shipTypes = ['Titan', 'Super', 'Carrier', 'Dread', 'FAX'];
         $hasHull = array_fill_keys($shipTypes, false);
@@ -225,6 +216,8 @@ class EligibilityController extends Controller
 
         $mainCharacter = $character->refresh_token->user->main_character->name;
 
-        return view('seat-eligibility::eligibility.index', compact('character', 'allAssetsWereLookingFor', 'meets3MonthKillRequirement', 'mainCharacter', 'hasHull', 'hasSkills'));
+        return view('seat-eligibility::eligibility.index', compact('character', 'allAssetsWereLookingFor', 'mainCharacter', 'hasHull', 'hasSkills'));
     }
+
+
 }

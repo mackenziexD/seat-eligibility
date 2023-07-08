@@ -17,8 +17,6 @@
             <div class="row">
                 <div class="col-md-4 mb-2 charactersList">
                     <h4>Information Summery:</h4>
-                    @if($meets3MonthKillRequirement)<span class="text-success"><i class="fas fa-check-circle"></i> Meets 3 Month Kill Requirement Of 40 Kills</span></span>@else<span class="text-danger"><i class="fas fa-times-circle"></i> Doesn't Meet 3 Month Kill Requirement Of 40 Kills</span></span>@endif
-                    <hr>
                     @foreach($hasHull as $hull => $value)
                         @if($value==true)<span class="text-success"><i class="fas fa-check-circle"></i> Has a {{$hull}}</span>@else<span class="text-danger"><i class="fas fa-times-circle"></i> Doesn't have a {{$hull}}</span>@endif</br>
                     @endforeach
@@ -33,10 +31,9 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <img src="https://imageserver.eveonline.com/Character/{{$char['character_id']}}_64.jpg" class="img-thumbnail" style="width: 64px; height: 64px;">
-                                    {{ $char['name'] }}
+                                    <a href="https://zkillboard.com/character/{{$char['character_id']}}/" target="_blank" rel="noopener noreferrer">{{ $char['name'] }}</a>
                                 </div>
                                 <div class="col-md-6">
-                                        <li>{{$char['totalKillsOver3Months']}} Kills Over Last 3 Months</li>
                                         @if($char['hasTitan'])<li><span class="badge badge-success">Owns a Titan</span></li>@endif
                                         @if($char['hasSuper'])<li><span class="badge badge-success">Owns a Super</span></li>@endif
                                         @if($char['hasDread'])<li><span class="badge badge-success">Owns a Dread</span></li>@endif
@@ -57,5 +54,9 @@
         </div>
 
     </div>
+
+<script>
+    
+</script>
 
 @stop
