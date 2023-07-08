@@ -5,7 +5,7 @@
 
 Eligibility Checker plugin for [SeAT](https://github.com/eveseat/seat) that allows recruiters to check if main and all associated characters have hit a minimum kill requirement (data pulled from zkillboard/api) and own/can fly a super, fax, titan, carrier or dread.
 
-![https://i.imgur.com/atov9LM.png](https://i.imgur.com/atov9LM.png)
+![https://i.imgur.com/xwUFoTt.jpeg](https://i.imgur.com/xwUFoTt.jpeg)
 
 ## Installation
 
