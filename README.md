@@ -1,6 +1,6 @@
 # SeAT-Eligibility - Eligibility Checker plugin for SeAT
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/helious/seat-eligibility.svg?style=flat-square)](https://packagist.org/packages/seat/busa)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/helious/seat-eligibility.svg?style=flat-square)](https://packagist.org/packages/helious/seat-eligibility)
 [![Total Downloads](https://img.shields.io/packagist/dt/helious/seat-eligibility.svg?style=flat-square)](https://packagist.org/packages/helious/seat-eligibility)
 
 Eligibility Checker plugin for [SeAT](https://github.com/eveseat/seat) that allows recruiters to check if main and all associated characters have hit a minimum kill requirement (data pulled from zkillboard/api) and own/can fly a super, fax, titan, carrier or dread.
