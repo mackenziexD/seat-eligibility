@@ -17,9 +17,9 @@
         }
     },
     "require": {
-        "laravel/framework": "^6.0",
-        "eveseat/web": "^4.0",
-        "eveseat/eveapi": "^4.0"
+        "laravel/framework": "^10.0",
+        "eveseat/web": "^5.0",
+        "eveseat/eveapi": "^5.0"
     },
     "extra": {
         "laravel": {
