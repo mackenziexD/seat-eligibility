@@ -30,11 +30,6 @@ class EligibilityServiceProvider extends AbstractSeatPlugin
         // Load views
         $this->loadViewsFrom(__DIR__.'/resources/views', 'seat-eligibility');
 
-        // Publish migrations
-        $this->publishes([
-            __DIR__.'/database/migrations' => database_path('migrations'),
-        ], 'migrations');
-
     }
 
     /**
